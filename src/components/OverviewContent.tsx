@@ -154,21 +154,22 @@ const SummaryCard: React.FC<SummaryCardProps & { dragHandleProps?: any }> = ({
   );
 };
 
+// Move transactions outside the component to prevent recreation on each render
+const TRANSACTIONS: Transaction[] = [
+  { date: '2023-10-01', remark: 'Salary', amount: 3000, currency: 'USD', type: 'Credit' },
+  { date: '2023-10-02', remark: 'Groceries', amount: -150, currency: 'USD', type: 'Debit' },
+  { date: '2023-10-03', remark: 'Gym Membership', amount: -50, currency: 'USD', type: 'Debit' },
+  { date: '2023-10-04', remark: 'Dinner', amount: -40, currency: 'USD', type: 'Debit' },
+  { date: '2023-10-05', remark: 'Movie Tickets', amount: -30, currency: 'USD', type: 'Debit' },
+  { date: '2023-10-06', remark: 'Rent', amount: -1200, currency: 'USD', type: 'Debit' },
+  { date: '2023-10-07', remark: 'Utilities', amount: -100, currency: 'USD', type: 'Debit' },
+  { date: '2023-10-08', remark: 'Car Payment', amount: -400, currency: 'USD', type: 'Debit' },
+  { date: '2023-10-09', remark: 'Insurance', amount: -200, currency: 'USD', type: 'Debit' },
+];
+
 const TransactionTable: React.FC = () => {
   const [sortColumn, setSortColumn] = useState<SortColumn | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
-
-  const transactions: Transaction[] = [
-    { date: '2023-10-01', remark: 'Salary', amount: 3000, currency: 'USD', type: 'Credit' },
-    { date: '2023-10-02', remark: 'Groceries', amount: -150, currency: 'USD', type: 'Debit' },
-    { date: '2023-10-03', remark: 'Gym Membership', amount: -50, currency: 'USD', type: 'Debit' },
-    { date: '2023-10-04', remark: 'Dinner', amount: -40, currency: 'USD', type: 'Debit' },
-    { date: '2023-10-05', remark: 'Movie Tickets', amount: -30, currency: 'USD', type: 'Debit' },
-    { date: '2023-10-06', remark: 'Rent', amount: -1200, currency: 'USD', type: 'Debit' },
-    { date: '2023-10-07', remark: 'Utilities', amount: -100, currency: 'USD', type: 'Debit' },
-    { date: '2023-10-08', remark: 'Car Payment', amount: -400, currency: 'USD', type: 'Debit' },
-    { date: '2023-10-09', remark: 'Insurance', amount: -200, currency: 'USD', type: 'Debit' },
-  ];
 
   const handleSort = (column: SortColumn) => {
     if (sortColumn === column) {
@@ -180,9 +181,9 @@ const TransactionTable: React.FC = () => {
   };
 
   const sortedTransactions = useMemo(() => {
-    if (!sortColumn) return transactions;
+    if (!sortColumn) return TRANSACTIONS;
 
-    return [...transactions].sort((a, b) => {
+    return [...TRANSACTIONS].sort((a, b) => {
       let aValue: any = a[sortColumn];
       let bValue: any = b[sortColumn];
 
@@ -209,7 +210,7 @@ const TransactionTable: React.FC = () => {
       }
       return 0;
     });
-  }, [transactions, sortColumn, sortDirection]);
+  }, [sortColumn, sortDirection]);
 
   const getSortIcon = (column: SortColumn) => {
     if (sortColumn === column) {
