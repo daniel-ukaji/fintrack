@@ -92,18 +92,22 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                 isCollapsed && "justify-center"
               )}
             >
-              <Icon 
-                className={cn(
-                  "h-5 w-5 flex-shrink-0 transition-colors",
-                  isActive 
-                    ? "text-[#3A6C7B]" 
-                    : "text-[#1B2528] group-hover:text-[#3A6C7B]"
-                )}
-              />
+              {/* Only show icon when sidebar is collapsed */}
+              {isCollapsed && (
+                <Icon 
+                  className={cn(
+                    "h-5 w-5 flex-shrink-0 transition-colors",
+                    isActive 
+                      ? "text-[#3A6C7B]" 
+                      : "text-[#1B2528] group-hover:text-[#3A6C7B]"
+                  )}
+                />
+              )}
+              {/* Only show text when sidebar is not collapsed */}
               {!isCollapsed && (
                 <span 
                   className={cn(
-                    "ml-3 font-medium transition-colors",
+                    "font-medium transition-colors",
                     isActive 
                       ? "text-[#3A6C7B]" 
                       : "text-[#1B2528] group-hover:text-[#3A6C7B]"
