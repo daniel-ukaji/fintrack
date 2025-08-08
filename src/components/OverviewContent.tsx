@@ -44,7 +44,7 @@ if (typeof document !== 'undefined') {
   styleSheet.innerText = globalStyles;
   document.head.appendChild(styleSheet);
 }
-//co
+
 interface SummaryCardData {
   id: string;
   title: string;
@@ -55,6 +55,11 @@ interface SummaryCardData {
 
 interface SummaryCardProps extends SummaryCardData {
   isDragging?: boolean;
+}
+
+interface DragHandleProps {
+  ref: React.Ref<HTMLButtonElement>;
+  [key: string]: unknown;
 }
 
 interface Transaction {
@@ -107,7 +112,7 @@ const SortableSummaryCard: React.FC<SummaryCardData> = (props) => {
   );
 };
 
-const SummaryCard: React.FC<SummaryCardProps & { dragHandleProps?: any }> = ({ 
+const SummaryCard: React.FC<SummaryCardProps & { dragHandleProps?: DragHandleProps }> = ({ 
   title, 
   value, 
   change, 
@@ -184,22 +189,22 @@ const TransactionTable: React.FC = () => {
     if (!sortColumn) return TRANSACTIONS;
 
     return [...TRANSACTIONS].sort((a, b) => {
-      let aValue: any = a[sortColumn];
-      let bValue: any = b[sortColumn];
+      let aValue: string | number | Date = a[sortColumn];
+      let bValue: string | number | Date = b[sortColumn];
 
       if (sortColumn === 'date') {
-        aValue = new Date(aValue).getTime();
-        bValue = new Date(bValue).getTime();
+        aValue = new Date(aValue as string).getTime();
+        bValue = new Date(bValue as string).getTime();
       }
 
       if (sortColumn === 'amount') {
-        aValue = Math.abs(aValue);
-        bValue = Math.abs(bValue);
+        aValue = Math.abs(aValue as number);
+        bValue = Math.abs(bValue as number);
       }
 
       if (typeof aValue === 'string') {
         aValue = aValue.toLowerCase();
-        bValue = bValue.toLowerCase();
+        bValue = (bValue as string).toLowerCase();
       }
 
       if (aValue < bValue) {
