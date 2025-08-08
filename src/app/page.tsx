@@ -1,13 +1,4 @@
 "use client";
-
-import { Button } from "@/components/ui/button";
-import { Ellipsis } from "lucide-react";
-import { AiFillCaretDown } from "react-icons/ai";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
 import { useState } from "react";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { AvatarGroup } from "@/components/AvatarGroup";

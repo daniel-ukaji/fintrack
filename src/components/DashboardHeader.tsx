@@ -14,7 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Ellipsis, FileText, Image, Settings, ScrollText } from "lucide-react";
+import { Ellipsis, FileText, Settings, ScrollText, Images } from "lucide-react";
 import { AiFillCaretDown } from "react-icons/ai";
 import { StatusBadge } from './StatusBadge';
 
@@ -109,7 +109,7 @@ export const DashboardHeader: React.FC = () => {
               onClick={handleDownloadJPG}
               className="flex items-center gap-3 w-full p-4 text-left cursor-pointer rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
             >
-              <Image className="w-5 h-5 text-gray-600 flex-shrink-0" />
+              <Images className="w-5 h-5 text-gray-600 flex-shrink-0" />
               <span className="text-gray-900 font-medium">Download Transactions as JPG</span>
             </button>
           </div>
